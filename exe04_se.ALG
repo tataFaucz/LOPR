@@ -1,22 +1,18 @@
 Algoritmo "semnome"
 
 Var
-   numeroA: real
-   numeroB: real
+   diasAtraso: inteiro
+   resultadoA: real
+   resultadoB: real
 Inicio
-    escreval ("Digite o primeiro número:")
-    leia (numeroA)
-    escreval ("Digite o segundo número:")
-    leia (numeroB)
-    
-    SE (numeroA > numeroB) ENTAO
-        escreval ("O número", numeroA, " é maior que", numeroB)
-    FIMSE
-    SE (numeroA < numeroB) ENTAO
-        escreval ("O número", numeroB, " é maior que", numeroA)
-    FIMSE
-    
-    SE (numeroA = numeroB) ENTAO
-       escreval ("Os números são iguais! ")
-    FIMSE
+   escreval ("Digite quantos dias a devolução do livro está em atraso:")
+   leia (diasAtraso)
+   resultadoA <- diasAtraso * 2.5
+   resultadoB <- diasAtraso * 5
+
+   SE (diasAtraso < 7) ENTAO
+      escreval ("Você está devendo", resultadoA, " reais, sendo cobrado R$2.50 ao dia de atraso")
+   SENAO
+      escreval ("Você está devendo", resultadoB, " reais, sendo cobrado R$5.00 ao dia de atraso")
+   FIMSE
 Fimalgoritmo
