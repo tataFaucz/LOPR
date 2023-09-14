@@ -20,6 +20,8 @@ Inicio
    CASO 2, 7
      escreval("Seu carro não pode rodar nas quartas-feiras")
    CASO 3, 8
-     escreval ("Seu carro não pode rodar nas quintas-feiras"
+     escreval ("Seu carro não pode rodar nas quintas-feiras")
+   CASO 4, 9
+     escreval ("Seu carro não pode rodar nas sextas-feiras!")
    FIMESCOLHA
 Fimalgoritmo
