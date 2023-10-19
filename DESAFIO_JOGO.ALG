@@ -1,29 +1,24 @@
-Algoritmo "desafio_jogo"
-// Disciplina   : [Linguagem e Lógica de Programação]
-// Professor   : Marisângila
-// Descrição   : Jogo da velha
-// Autor(a)    : Thais Faucz Jasse
-// Data atual  : 18/10/2023
-Var
+algoritmo "jogo_ex_desafio"
 
-   //Declaração de Variaveis
+var
 
-   jogo: vetor [0..2,0..2] de caractere
-   i,j, posicao, contador: inteiro
-   simbolo: caractere
+   jogo: vetor[1..3, 1..3] de caractere
+   i, j, contador, posicao: inteiro
+   simbolo : caractere
    resposta: logico
 
    //Declaração de Procedimento
 
 procedimento mostrarJogo()
+
 Inicio
+
    escreval("+---+---+---+")
-   para i de 0 ate 2 faca
-      para j de 0 ate 2 faca
-         escreval ()
-         escreval("| ", jogo[i,j]:1)
+   para i de 1 ate 3 faca
+      para j de 1 ate 3 faca
+         escreva("| ", jogo[i,j]:1)
       fimpara
-      escreval("|")
+      escreva("|")
       escreval()
       escreval("+---+---+---+")
    fimpara
@@ -32,7 +27,9 @@ fimprocedimento
 //Declaração de Procedimento
 
 procedimento mudarJogador()
-Inicio
+
+inicio
+
    se (simbolo = "X") entao
       simbolo <- "O"
    senao
@@ -42,14 +39,17 @@ fimprocedimento
 
 //Declaração de Função
 
-funcao jogar(x: caractere; o: inteiro): logico
+funcao jogar(x: caractere; y: inteiro): logico
+
 Var
    mudou: logico
+
 inicio
+
    mudou <- falso
-   para i de 0 ate 2 faca
-      para j de 0 ate 2 faca
-         se(jogo[i,j] = NumpCarac(o)) entao
+   para i de 1 ate 3 faca
+      para j de 1 ate 3 faca
+         se(jogo[i,j] = numpcarac(y)) entao
             jogo[i,j] <- x
             mudou <- verdadeiro
          fimse
@@ -61,79 +61,101 @@ fimfuncao
 //Declaração de Função
 
 funcao terminouJogo(): logico
+
 Var
+
    terminou: logico
-   erro: inteiro
+   ocorre: inteiro
+
 inicio
+
    terminou <- falso
 
-   // Jogos em linha
+   // Jogos vencidos em linha
 
-   para i de 0 ate 2 faca
-      se (jogo[1,j] = jogo[2,j]) e (jogo[2,j] = jogo[3,j]) entao
-         terminou <- verdadeiro
-      fimse
-   fimpara
-
-   // Jogos em coluna
-
-   para j de 1 ate 3 faca
+   para i de 1 ate 3 faca
       se (jogo[i,1] = jogo[i,2]) e (jogo[i,2] = jogo[i,3]) entao
          terminou <- verdadeiro
+         mudarJogador()
+         escreval (simbolo, " venceu!")
       fimse
    fimpara
 
-   // Jogos em diagonal
+   // Jogos vencidos em coluna
 
-   Se (jogo[1,1] = jogo[2,2]) e (jogo[2,2] = jogo[3,3]) entao
+   para j de 1 ate 3 faca
+      Se (jogo[1,j] = jogo[2,j]) e (jogo[2,j] = jogo[3,j]) entao
+         terminou <- verdadeiro
+         mudarJogador()
+         escreval (simbolo, " venceu!")
+      fimse
+   fimpara
+
+   // Jogos vencidos em diagonal
+
+   se (jogo[1,1] = jogo[2,2]) e (jogo[2,2] = jogo[3,3]) entao
       terminou <- verdadeiro
+       mudarJogador()
+         escreval (simbolo, " venceu!")
    fimse
-   Se (jogo[1,3] = jogo[2,2]) e (jogo[2,2] = jogo[3,1]) entao
+   se (jogo[1,3] = jogo[2,2]) e (jogo[2,2] = jogo[3,1]) entao
       terminou <- verdadeiro
+      mudarJogador()
+         escreval (simbolo, " venceu!")
    fimse
 
-   // Jogos em VELHA
+   // Jogos em velha (empate)
 
-   erro <- 0
-   Para i <- 0 ate 2 faca
-      Para j <- 0 ate 2 faca
-         Se (jogo[i,j] <> "X") e (jogo[i,j] <> "O") entao
-            erro <- erro + 1
+   ocorre <- 0
+   para i de 1 ate 3 faca
+      para j de 1 ate 3 faca
+         se (jogo[i,j] <> "X") e (jogo[i,j] <> "O") entao
+            ocorre <- ocorre + 1
          fimse
       fimpara
    fimpara
-
-   se (erro = 0) entao
+   se (ocorre = 0) entao
       terminou <- verdadeiro
+      escreval ("Empate!")
    fimse
 
-   // Retorna se o jogo acabou ou nao
+   // Retorna se o jogo acabou ou não
 
    retorne terminou
 fimfuncao
 
+
 inicio
+
    contador <- 1
    simbolo <- "X"
-   Para i de 0 ate 2 faca
-      Para j de 0 ate 2 faca
-         jogo[i,j] <- NumpCarac(contador)
+
+   para i de 1 ate 3 faca
+      para j de 1 ate 3 faca
+         jogo[i,j] <- numpcarac(contador)
          contador <- contador + 1
-      FimPara
-   FimPara
+      fimpara
+   fimpara
+
    mostrarJogo()
+
    repita
       repita
-         escreval("Vai jogar [", simbolo:1, "] em qual posicao? Digite a sua posição desejada ou aperte 'ESC' para sair do jogo!")
+         escreval("Vai jogar [", simbolo:1, "] em qual posicao? 'aperte ESC se quiser sair'")
          leia(posicao)
-         resposta <- Jogar(simbolo, posicao))
+
+         resposta <- jogar(simbolo, posicao))
          se (resposta = falso) entao
-            escreval("JOGADA INVALIDA!")
+            escreval("Jogada inválida!")
          fimse
-      ate (resposta = verdadeiro) repita
+
+      ate (resposta = verdadeiro)
       mudarJogador()
       limpatela
       mostrarJogo()
-   ate (terminouJogo() = verdadeiro) entao
-   escreval("Fim do jogo!")
+
+   ate (terminouJogo() = verdadeiro)
+
+   escreval("Jogo finalizado! Aperte 'ESC' para sair do jogo")
+
 fimalgoritmo
