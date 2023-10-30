@@ -5,23 +5,21 @@ TIPO
       genero: caractere
       cantorBanda: caractere
       duracao: caractere
-      n: inteiro
-      resposta: caractere
    fimregistro
 VAR
-   opcao: inteiro
-PROCEDIMENTO inserirMusica
+   opcao, quantidade, i: inteiro
+   musicas: vetor[0..99] de musica
+
+procedimento inserirMusica
 VAR
-    playlist: caractere
+   musicas: vetor[0..99] de musica
+   i: inteiro
+   resposta: inteiro
 INICIO
-   escreval ("------------------------------")
-   escreval("Digite o nome da playilist: ")
-   leia(playlist)
-   escreval ("------------------------------")
-   escreval ("Deseja iniciar playlist? Para iniciar, digite[0]. Para 'FIM' da playlist, digite[1]"
-   leia resposta
-   enquanto resposta = 0 entao
-      escreval ("-----------------------------")
+   resposta <- 1
+   quantidade <- 0
+   enquanto resposta = 1 faca
+      escreval("-----------------------------")
       escreval("Digite o nome da musica: ")
       leia(musicas[i].nome)
       escreval("Insira o genero:")
@@ -30,21 +28,25 @@ INICIO
       leia(musicas[i].cantorBanda)
       escreval("Informe a duração da música: ")
       leia(musicas[i].duracao)
+      escreval ("Deseja continuar a playlist? Para continuar, digite[1]; para ver lista de músicas digite [2] e para 'FIM' da playlist, digite[3]")
+      leia (resposta)
+      quantidade <- quantidade + 1
    fimenquanto
-
-   se resposta = 1 entao
-      escreval ("Playlist finalizada com sucesso!")
+   se resposta = 3 entao
+   escreval ("Playlist finalizada com sucesso!")
+   senao
+   mostrarMusicas()
+   fimse
 fimprocedimento
 
 procedimento mostrarMusicas
 VAR
-   i:inteiro
+   n, i:inteiro
 INICIO
-   para i de 1 ate n faca
-      escreval("------------------------------")
+ escreval("------------------------------")
       escreval("Dados da Playlist")
+   para i de 1 ate quantidade faca
       escreval("------------------------------")
-      escreval(playlist)
       escreval(musicas[i].nome)
       escreval(musicas[i].genero)
       escreval(musicas[i].cantorBanda)
@@ -55,6 +57,7 @@ fimprocedimento
 Inicio
    escreval("[1] Inserir Música")
    escreval("[2] Mostrar Músicas")
+   escreval("[3] 'FIM'")
    escreval
    escreval("Selecione uma das opções acima para continuarmos com a sua experiência: ")
    leia(opcao)
@@ -63,5 +66,7 @@ Inicio
       inserirMusica
    caso 2
       mostrarMusicas()
-    fimescolha
+   caso 3
+      escreval ("'FIM'")
+   fimescolha
 fimalgoritmo
