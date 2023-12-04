@@ -9,18 +9,17 @@ Tipo
       nomeEvento, local, horario, descricao: caractere
    fimregistro
 
-   questionario=registro
-      perguntas: caractere
-      respostasAdm: caractere
-   fimregistro
 Var
    evento: vetor [1..10] de inteiro
    perguntasQuiz: vetor[0..9] de inteiro
    respostasUsuario: vetor[0..9] de inteiro
    opcao, i: inteiro
+   nEventos: inteiro
+   nomeEvento, local, horario, descricao: caractere
    email, senha, nome, sobrenome: caractere
    perguntaMenu: inteiro
    j: inteiro
+   numEvento: inteiro
 
    //Quiz com perguntas estáticas
 
@@ -115,9 +114,25 @@ Inicio
    fimse
    limpatela
    escreval("Quantidade de vezes que você respondeu [1]: ", contUm)
+   escreval
+   escreval("Evento sugerido para maioria [1]:")
+   escreval
+   eventoUm()
+   escreval
    escreval("Quantidade de vezes que você respondeu [2]: ", contDois)
+   escreval
+   escreval("Evento sugerido para maioria [2]:")
+   escreval
+   eventoDois()
+   escreval
    escreval("Quantidade de vezes que você respondeu [3]: ", contTres)
-   escreval()
+   escreval
+   escreval("Evento sugerido para maioria [3]:")
+   escreval
+   eventoTres()
+   escreval
+   mostrarEventos()
+
    perguntaMenu <- 2
    enquanto (perguntaMenu = 2) faca
       escreval("Deseja voltar ao menu inicial? [1 - Sim][2 - Não]")
@@ -288,7 +303,7 @@ fimprocedimento
 //Inserir evento(aba adm)
 procedimento inserirEvento
 Var
-   nEventos: inteiro
+
 Inicio
    limpatela
    escreval("--------------------------")
@@ -311,6 +326,19 @@ Inicio
    fimpara
    menuAdm()
 
+fimprocedimento
+
+//Ver evento(aba usuário)
+procedimento mostrarEventos
+
+Inicio
+   limpatela
+   para i de 1 ate nEventos faca
+      escreval("Nome evento: ", evento[i].nome)
+      escreval("Local: ", evento[i].local)
+      escreval("Horário: ", evento[i].horario)
+      escreval("Descrição: ", evento[i].descricao)
+   fimpara
 fimprocedimento
 
 //Menu Usuario
@@ -347,6 +375,39 @@ Inicio
 
    fimescolha
 fimprocedimento
+
+//Procedimentos de eventos pré-definidos
+procedimento eventoUm
+Inicio
+   limpatela
+   escreval("Evento: Jardim da Dança")
+   escreval("Local: Jardim da Dança - EEB Prof Germano Timm")
+   escreval("Horário: 14:00 hrs")
+   escreval("Descrição: Evento onde baiarinos se expressam através")
+   escreval("da arte que eles mais amam: dança!")
+fimprocedimento
+
+procedimento eventoDois
+Inicio
+   limpatela
+   escreval("Evento: Encontro das ruas")
+   escreval("Local: Praça do Museu de Arte de Joinville (MAJ)")
+   escreval("Horário: 19:15 hrs")
+   escreval("Descrição: Levando prosa pra todo lugar, o coletivo SLAM GUARÁ")
+   escreval("acolhe qualquer pessoa que queira se expressar em poesia ou em prosa.")
+   escreval("Batalha de prosas e muita diversão")
+fimprocedimento
+
+procedimento eventoTres
+Inicio
+   limpatela
+   escreval("Evento: Super XP")
+   escreval("Local: Univille")
+   escreval("Horário: 09:30 hrs às 18:30 hrs")
+   escreval("Descrição: Evento nerd que ocorre uma vez por ano,")
+   escreval("onde cosplayers aproveitam a oportunidade de mostrar sua arte e trabalho")
+fimprocedimento
+
 
 //Menu Adm
 procedimento menuAdm
