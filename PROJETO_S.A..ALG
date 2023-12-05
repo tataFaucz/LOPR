@@ -10,16 +10,9 @@ Tipo
    fimregistro
 
 Var
-   evento: vetor [1..10] de inteiro
-   perguntasQuiz: vetor[0..9] de inteiro
-   respostasUsuario: vetor[0..9] de inteiro
-   opcao, i: inteiro
-   nEventos: inteiro
-   nomeEvento, local, horario, descricao: caractere
+   evento: vetor [1..10] de eventos
+   opcao, i, nEventos, j, perguntaMenu: inteiro
    email, senha, nome, sobrenome: caractere
-   perguntaMenu: inteiro
-   j: inteiro
-   numEvento: inteiro
 
    //Quiz com perguntas estáticas
 
@@ -113,24 +106,23 @@ Inicio
       contTres <- contTres + 1
    fimse
    limpatela
+   escreval("------------------------------------------------------")
    escreval("Quantidade de vezes que você respondeu [1]: ", contUm)
-   escreval
    escreval("Evento sugerido para maioria [1]:")
    escreval
    eventoUm()
-   escreval
+   escreval("------------------------------------------------------")
    escreval("Quantidade de vezes que você respondeu [2]: ", contDois)
-   escreval
    escreval("Evento sugerido para maioria [2]:")
    escreval
    eventoDois()
-   escreval
+   escreval("------------------------------------------------------")
    escreval("Quantidade de vezes que você respondeu [3]: ", contTres)
-   escreval
    escreval("Evento sugerido para maioria [3]:")
    escreval
    eventoTres()
-   escreval
+   escreval("------------------------------------------------------")
+   escreval("Eventos do dia:")
    mostrarEventos()
 
    perguntaMenu <- 2
@@ -271,6 +263,13 @@ Inicio
    leia(email)
    escreval("Senha: ")
    leia(senha)
+   limpatela
+   escreval(nome)
+   escreval(sobrenome)
+   escreval(nickname)
+   escreval(email)
+   escreval("senha:******")
+   escreval
    escreval("Alterações de perfil concluídas!")
    menuAdm()
 fimprocedimento
@@ -295,32 +294,42 @@ Inicio
    leia(email)
    escreval("Senha: ")
    leia(senha)
-   escreval("Alterações de perfil concluídas!")
+   escreval(nome)
+   escreval(sobrenome)
+   escreval(nickname)
+   escreval(email)
+   escreval("senha:******")
+   escreval
+   escreval("Alterações de perfil concluídas! ")
    menuUsuario()
 
 fimprocedimento
 
 //Inserir evento(aba adm)
 procedimento inserirEvento
-Var
 
 Inicio
    limpatela
-   escreval("--------------------------")
-   escreval("Quantos eventos deseja inserir?")
+   escreval("-----------------------------------------------------------------")
+   escreval("Quantos eventos deseja inserir? Você pode inserir até 10 eventos")
    leia(nEventos)
-
-   para i de 1 ate nEventos faca
-      escreval("--------------------------")
+   escreva(evento[1].nomeEvento)
+   para j de 1 ate nEventos faca
+      escreval("-----------------------------------------------------------------")
       escreval("Nome do Evento: ")
-      leia(evento[i].nomeEvento)
+      leia(evento[j].nomeEvento)
       escreval("Local do Evento: ")
-      leia(evento[i].local)
+      leia(evento[j].local)
       escreval("Horário do evento[hh:mm]: ")
-      leia(evento[i].horario)
+      leia(evento[j].horario)
       escreval("Insira uma breve descrição sobre o evento: ")
-      leia(evento[i].descricao)
+      leia(evento[j].descricao)
       escreval
+      limpatela
+      escreval("Nome evento: ", evento[j].nomeEvento)
+      escreval("Local: ", evento[j].local)
+      escreval("Horário: ", evento[j].horario)
+      escreval("Descrição: ", evento[j].descricao)
       escreval("Evento inserido ao programa com sucesso!")
       escreval
    fimpara
@@ -330,14 +339,15 @@ fimprocedimento
 
 //Ver evento(aba usuário)
 procedimento mostrarEventos
+Var
 
 Inicio
-   limpatela
-   para i de 1 ate nEventos faca
-      escreval("Nome evento: ", evento[i].nome)
-      escreval("Local: ", evento[i].local)
-      escreval("Horário: ", evento[i].horario)
-      escreval("Descrição: ", evento[i].descricao)
+
+   para j de 1 ate nEventos faca
+      escreval("Nome evento: ", evento[j].nomeEvento)
+      escreval("Local: ", evento[j].local)
+      escreval("Horário: ", evento[j].horario)
+      escreval("Descrição: ", evento[j].descricao)
    fimpara
 fimprocedimento
 
@@ -348,9 +358,8 @@ Var
    opcaoMenuUsuario: inteiro
 
 Inicio
-   limpatela
    escreval("--------------------------")
-   escreval("MENU")
+   escreval("          MENU")
    escreval("--------------------------")
    escreval("Selecione uma das opções")
    escreval("[1] Iniciar Quiz")
@@ -374,12 +383,13 @@ Inicio
       excluirContaUsuario()
 
    fimescolha
+   limpatela
 fimprocedimento
 
 //Procedimentos de eventos pré-definidos
 procedimento eventoUm
 Inicio
-   limpatela
+
    escreval("Evento: Jardim da Dança")
    escreval("Local: Jardim da Dança - EEB Prof Germano Timm")
    escreval("Horário: 14:00 hrs")
@@ -389,7 +399,7 @@ fimprocedimento
 
 procedimento eventoDois
 Inicio
-   limpatela
+
    escreval("Evento: Encontro das ruas")
    escreval("Local: Praça do Museu de Arte de Joinville (MAJ)")
    escreval("Horário: 19:15 hrs")
@@ -400,7 +410,7 @@ fimprocedimento
 
 procedimento eventoTres
 Inicio
-   limpatela
+
    escreval("Evento: Super XP")
    escreval("Local: Univille")
    escreval("Horário: 09:30 hrs às 18:30 hrs")
@@ -415,9 +425,8 @@ Var
    opcaoMenuAdm: inteiro
 
 Inicio
-   limpatela
    escreval("--------------------------")
-   escreval("MENU")
+   escreval("          MENU")
    escreval("--------------------------")
    escreval("Selecione uma das opções")
    escreval("[1] Configurações de Perfil")
@@ -440,6 +449,7 @@ Inicio
 
    caso 4
       excluirContaAdm()
+      limpatela
 fimprocedimento
 
 Inicio   // Entrada|Saída do Usuário
