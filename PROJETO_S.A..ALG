@@ -12,6 +12,7 @@ Tipo
 Var
    evento: vetor [1..10] de eventos
    opcao, i, nEventos, j, perguntaMenu: inteiro
+   classifiqueUm, classifiqueDois, classifiqueTres: caractere
    email, senha, nome, sobrenome: caractere
 
    //Quiz com perguntas estáticas
@@ -112,15 +113,21 @@ Inicio
    escreval
    eventoUm()
    escreval("------------------------------------------------------")
+   classifiqueUm()
+   escreval("------------------------------------------------------")
    escreval("Quantidade de vezes que você respondeu [2]: ", contDois)
    escreval("Evento sugerido para maioria [2]:")
    escreval
    eventoDois()
    escreval("------------------------------------------------------")
+   classifiqueDois()
+   escreval("------------------------------------------------------")
    escreval("Quantidade de vezes que você respondeu [3]: ", contTres)
    escreval("Evento sugerido para maioria [3]:")
    escreval
    eventoTres()
+   escreval("------------------------------------------------------")
+   classifiqueTres()
    escreval("------------------------------------------------------")
    escreval("Eventos do dia:")
    mostrarEventos()
@@ -333,7 +340,7 @@ Inicio
       escreval("Evento inserido ao programa com sucesso!")
       escreval
    fimpara
-   menuAdm()
+   classificacaoEvento()
 
 fimprocedimento
 
@@ -349,6 +356,33 @@ Inicio
       escreval("Horário: ", evento[j].horario)
       escreval("Descrição: ", evento[j].descricao)
    fimpara
+fimprocedimento
+
+//Classificação do evento
+procedimento classificacaoEvento
+Var
+   classificacao: inteiro
+Inicio
+   escreval("Em qual classe você acredita que esse evento se encaixa?")
+   escreval("[1] Expressão corporal(dança, teatro...)")
+   escreval("[2] Expressão visual ou recital(desenho, museu, poesia...)")
+   escreval("[3] Expressão sonora ou eventos sazonais(SUPER XP, Hanamachi...)")
+   leia(classificacao)
+
+   escolha(classificacao)
+   caso 1
+       classifiqueUm <- evento[j].nomeEvento, evento[j].local, evento[j].horario, evento[j].descricao
+
+   caso 2
+       classifiqueDois <- evento[j].nomeEvento, evento[j].local, evento[j].horario, evento[j].descricao
+
+   caso 3
+      classifiqueTres <- evento[j].nomeEvento, evento[j].local, evento[j].horario, evento[j].descricao
+
+   fimescolha
+   limpatela
+   escreval("Evento classificado com sucesso")
+   menuAdm()
 fimprocedimento
 
 //Menu Usuario
