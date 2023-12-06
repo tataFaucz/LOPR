@@ -112,22 +112,22 @@ Inicio
    escreval("Evento sugerido para maioria [1]:")
    escreval
    eventoUm()
-   escreval("------------------------------------------------------")
-   classifiqueUm()
+   escreval
+   escreval(classifiqueUm)
    escreval("------------------------------------------------------")
    escreval("Quantidade de vezes que você respondeu [2]: ", contDois)
    escreval("Evento sugerido para maioria [2]:")
    escreval
    eventoDois()
-   escreval("------------------------------------------------------")
-   classifiqueDois()
+   escreval
+   escreval(classifiqueDois)
    escreval("------------------------------------------------------")
    escreval("Quantidade de vezes que você respondeu [3]: ", contTres)
    escreval("Evento sugerido para maioria [3]:")
    escreval
    eventoTres()
-   escreval("------------------------------------------------------")
-   classifiqueTres()
+   escreval
+   escreval(classifiqueTres)
    escreval("------------------------------------------------------")
    escreval("Eventos do dia:")
    mostrarEventos()
