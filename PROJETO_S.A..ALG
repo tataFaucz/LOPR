@@ -7,6 +7,7 @@ Algoritmo "projeto_s.a."
 Tipo
    eventos=registro
       nomeEvento, local, horario, descricao: caractere
+      categoria: caractere
    fimregistro
 
 Var
@@ -16,7 +17,6 @@ Var
    email, senha, nome, sobrenome: caractere
 
    //Quiz com perguntas estáticas
-
 procedimento perguntasRespostas
 Var
    respostas: vetor [0..4] de inteiro
@@ -106,43 +106,54 @@ Inicio
    se(respostas[i]=3) entao
       contTres <- contTres + 1
    fimse
+   resultadoQuiz()
+fimprocedimento
+
+//Resutados dos eventos do Quiz
+procedimento resultadoQuiz
+Inicio
    limpatela
    escreval("------------------------------------------------------")
    escreval("Quantidade de vezes que você respondeu [1]: ", contUm)
    escreval("Evento sugerido para maioria [1]:")
    escreval
    eventoUm()
-   escreval
+   escreval("------------------------------------------------------")
    escreval(classifiqueUm)
    escreval("------------------------------------------------------")
    escreval("Quantidade de vezes que você respondeu [2]: ", contDois)
    escreval("Evento sugerido para maioria [2]:")
    escreval
    eventoDois()
-   escreval
+   escreval("------------------------------------------------------")
    escreval(classifiqueDois)
    escreval("------------------------------------------------------")
    escreval("Quantidade de vezes que você respondeu [3]: ", contTres)
    escreval("Evento sugerido para maioria [3]:")
    escreval
    eventoTres()
-   escreval
+   escreval("------------------------------------------------------")
    escreval(classifiqueTres)
    escreval("------------------------------------------------------")
-   escreval("Eventos do dia:")
+
+   escreval("Eventos do dia classificados acima:")
    mostrarEventos()
-
-   perguntaMenu <- 2
-   enquanto (perguntaMenu = 2) faca
-      escreval("Deseja voltar ao menu inicial? [1 - Sim][2 - Não]")
-      leia(perguntaMenu)
-      se perguntaMenu <> 2 entao
-         menuUsuario()
-      fimse
-   fimenquanto
-
+   escreval("------------------------------------------------------")
+   confirmacaoMenu()
 fimprocedimento
 
+//Pergunta de confirmação
+procedimento confirmacaoMenu
+perguntaMenu <- 2
+enquanto (perguntaMenu = 2) faca
+   escreval("Deseja voltar ao menu inicial? [1 - Sim][2 - Não]")
+   leia(perguntaMenu)
+   se perguntaMenu <> 2 entao
+      menuUsuario()
+   fimse
+fimenquanto
+
+fimprocedimento
 
 // Cadastro Usuário
 procedimento entradaUsuario
@@ -339,15 +350,16 @@ Inicio
       escreval("Descrição: ", evento[j].descricao)
       escreval("Evento inserido ao programa com sucesso!")
       escreval
+      classificacaoEvento()
    fimpara
-   classificacaoEvento()
+   menuAdm()
 
 fimprocedimento
 
 //Ver evento(aba usuário)
 procedimento mostrarEventos
 Var
-
+   j: inteiro
 Inicio
 
    para j de 1 ate nEventos faca
@@ -371,18 +383,17 @@ Inicio
 
    escolha(classificacao)
    caso 1
-       classifiqueUm <- evento[j].nomeEvento, evento[j].local, evento[j].horario, evento[j].descricao
+      classifiqueUm <- evento[j].nomeEvento
 
    caso 2
-       classifiqueDois <- evento[j].nomeEvento, evento[j].local, evento[j].horario, evento[j].descricao
+      classifiqueDois <- evento[j].nomeEvento
 
    caso 3
-      classifiqueTres <- evento[j].nomeEvento, evento[j].local, evento[j].horario, evento[j].descricao
+      classifiqueTres <- evento[j].nomeEvento
 
    fimescolha
    limpatela
    escreval("Evento classificado com sucesso")
-   menuAdm()
 fimprocedimento
 
 //Menu Usuario
@@ -445,11 +456,11 @@ fimprocedimento
 procedimento eventoTres
 Inicio
 
-   escreval("Evento: Super XP")
-   escreval("Local: Univille")
-   escreval("Horário: 09:30 hrs às 18:30 hrs")
-   escreval("Descrição: Evento nerd que ocorre uma vez por ano,")
-   escreval("onde cosplayers aproveitam a oportunidade de mostrar sua arte e trabalho")
+   escreval("Evento: Film Concert")
+   escreval("Local: Teatro Juarez Machado")
+   escreval("Horário: 20:00 hrs")
+   escreval("Descrição:Concerto com a temática de músicas de filmes")
+   escreval("marcantes para a história do cinema")
 fimprocedimento
 
 
@@ -486,6 +497,7 @@ Inicio
       limpatela
 fimprocedimento
 
-Inicio   // Entrada|Saída do Usuário
+Inicio
+   // Entrada|Saída do Usuário
    cadastro()
 Fimalgoritmo
