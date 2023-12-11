@@ -13,14 +13,16 @@ Tipo
 Var
    evento: vetor [1..10] de eventos
    opcao, i, nEventos, j, perguntaMenu: inteiro
-   classifiqueUm, classifiqueDois, classifiqueTres: caractere
+   classifiqueUm: vetor[1..10] de caracter
+   classifiqueDois: vetor [1..10] de caracter
+   classifiqueTres: vetor [1..10] de caractere
    email, senha, nome, sobrenome: caractere
+   contUm, contDois, contTres: inteiro
 
    //Quiz com perguntas estáticas
 procedimento perguntasRespostas
 Var
    respostas: vetor [0..4] de inteiro
-   contUm, contDois, contTres: inteiro
 Inicio
    limpatela
    escreval("---------------------")
@@ -119,21 +121,21 @@ Inicio
    escreval
    eventoUm()
    escreval("------------------------------------------------------")
-   escreval(classifiqueUm)
+   escreval(classifiqueUm[j])
    escreval("------------------------------------------------------")
    escreval("Quantidade de vezes que você respondeu [2]: ", contDois)
    escreval("Evento sugerido para maioria [2]:")
    escreval
    eventoDois()
    escreval("------------------------------------------------------")
-   escreval(classifiqueDois)
+   escreval(classifiqueDois[j])
    escreval("------------------------------------------------------")
    escreval("Quantidade de vezes que você respondeu [3]: ", contTres)
    escreval("Evento sugerido para maioria [3]:")
    escreval
    eventoTres()
    escreval("------------------------------------------------------")
-   escreval(classifiqueTres)
+   escreval(classifiqueTres[j])
    escreval("------------------------------------------------------")
 
    escreval("Eventos do dia classificados acima:")
@@ -144,14 +146,15 @@ fimprocedimento
 
 //Pergunta de confirmação
 procedimento confirmacaoMenu
-perguntaMenu <- 2
-enquanto (perguntaMenu = 2) faca
-   escreval("Deseja voltar ao menu inicial? [1 - Sim][2 - Não]")
-   leia(perguntaMenu)
-   se perguntaMenu <> 2 entao
-      menuUsuario()
-   fimse
-fimenquanto
+Inicio
+   perguntaMenu <- 2
+   enquanto (perguntaMenu = 2) faca
+      escreval("Deseja voltar ao menu inicial? [1 - Sim][2 - Não]")
+      leia(perguntaMenu)
+      se perguntaMenu <> 2 entao
+         menuUsuario()
+      fimse
+   fimenquanto
 
 fimprocedimento
 
@@ -331,7 +334,6 @@ Inicio
    escreval("-----------------------------------------------------------------")
    escreval("Quantos eventos deseja inserir? Você pode inserir até 10 eventos")
    leia(nEventos)
-   escreva(evento[1].nomeEvento)
    para j de 1 ate nEventos faca
       escreval("-----------------------------------------------------------------")
       escreval("Nome do Evento: ")
@@ -344,10 +346,7 @@ Inicio
       leia(evento[j].descricao)
       escreval
       limpatela
-      escreval("Nome evento: ", evento[j].nomeEvento)
-      escreval("Local: ", evento[j].local)
-      escreval("Horário: ", evento[j].horario)
-      escreval("Descrição: ", evento[j].descricao)
+      mostrarEventos()
       escreval("Evento inserido ao programa com sucesso!")
       escreval
       classificacaoEvento()
@@ -368,6 +367,7 @@ Inicio
       escreval("Horário: ", evento[j].horario)
       escreval("Descrição: ", evento[j].descricao)
    fimpara
+
 fimprocedimento
 
 //Classificação do evento
@@ -383,14 +383,11 @@ Inicio
 
    escolha(classificacao)
    caso 1
-      classifiqueUm <- evento[j].nomeEvento
-
+      classifiqueUm[j] <- evento[j].nomeEvento
    caso 2
-      classifiqueDois <- evento[j].nomeEvento
-
+      classifiqueDois[j] <- evento[j].nomeEvento
    caso 3
-      classifiqueTres <- evento[j].nomeEvento
-
+      classifiqueTres[j] <- evento[j].nomeEvento
    fimescolha
    limpatela
    escreval("Evento classificado com sucesso")
@@ -438,7 +435,7 @@ Inicio
    escreval("Evento: Jardim da Dança")
    escreval("Local: Jardim da Dança - EEB Prof Germano Timm")
    escreval("Horário: 14:00 hrs")
-   escreval("Descrição: Evento onde baiarinos se expressam através")
+   escreval("Descrição: Evento onde bailarinos se expressam através")
    escreval("da arte que eles mais amam: dança!")
 fimprocedimento
 
