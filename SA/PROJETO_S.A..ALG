@@ -13,8 +13,7 @@ Tipo
 Var
    evento: vetor [1..10] de eventos
    opcao, i, nEventos, j, perguntaMenu: inteiro
-   classifiqueUm, classifiqueDois, classifiqueTres: caractere
-   email, senha, nome, sobrenome: caractere
+   email, senha, nome, sobrenome, nickname: caractere
    contUm, contDois, contTres, rUm, rDois, rTres, resultado: inteiro
 
    //Quiz com perguntas estáticas
@@ -23,9 +22,9 @@ Var
    respostas: vetor [0..4] de inteiro
 Inicio
    limpatela
-   escreval("---------------------")
-   escreval("Iniciando Quiz")
-   escreval("---------------------")
+   escreval("-----------------------------------------------------------------")
+   escreval("                       Iniciando Quiz")
+   escreval("-----------------------------------------------------------------")
    escreval
    escreval("Qual desses locais você vai com mais frequência?")
    escreval("[1] Balada")
@@ -150,11 +149,11 @@ Inicio
    escreval
    escreval("-----------------------------------------------------------------")
    mostrarEventos()
-   confirmacaoMenu()
+   confirmacaoMenuUser()
 fimprocedimento
 
-//Pergunta de confirmação
-procedimento confirmacaoMenu
+//Pergunta de confirmação Usuário
+procedimento confirmacaoMenuUser
 Inicio
    perguntaMenu <- 2
    enquanto (perguntaMenu = 2) faca
@@ -164,7 +163,21 @@ Inicio
          menuUsuario()
       fimse
    fimenquanto
+   limpatela
+fimprocedimento
 
+//Pergunta de confirmação Administrador
+procedimento confirmacaoMenuAdm
+Inicio
+   perguntaMenu <- 2
+   enquanto (perguntaMenu = 2) faca
+      escreval("Deseja voltar ao menu inicial? [1 - Sim][2 - Não]")
+      leia(perguntaMenu)
+      se perguntaMenu <> 2 entao
+         menuAdm()
+      fimse
+   fimenquanto
+   limpatela
 fimprocedimento
 
 // Cadastro Usuário
@@ -172,11 +185,14 @@ procedimento entradaUsuario
 
 Inicio
    limpatela
-   escreval("--------------------------")
+   escreval("-----------------------------------------------------------------")
    escreval("Nome: ")
    leia(nome)
    escreval("Sobrenome: ")
    leia(sobrenome)
+   escreval("Nickname [ex.: Nome: Fulano")
+   escreval("Nickname: Fufu]: ")
+   leia(nickname)
    escreval("E-mail: ")
    leia(email)
    escreval("Senha: ")
@@ -190,6 +206,10 @@ procedimento entradaAdm
 
 Inicio
    limpatela
+   escreval("-----------------------------------------------------------------")
+   escreval("Nickname [ex.: Nome: Fulano")
+   escreval("Nickname: Fufu]: ")
+   leia(nickname)
    escreval("E-mail de Administrador: ")
    leia(email)
    escreval("Senha: ")
@@ -276,12 +296,10 @@ fimprocedimento
 
 //Configurações Adm
 procedimento configuracoesAdm
-Var
-   nickname: caractere
 
 Inicio
    limpatela
-   escreval("--------------------------")
+   escreval("-----------------------------------------------------------------")
    escreval("Nome: ")
    leia(nome)
    escreval("Sobrenome: ")
@@ -307,12 +325,9 @@ fimprocedimento
 //Configurações Usuário
 procedimento configuracoesUsuario
 
-Var
-   nickname: caractere
-
 Inicio
    limpatela
-   escreval("--------------------------")
+   escreval("-----------------------------------------------------------------")
    escreval("Nome: ")
    leia(nome)
    escreval("Sobrenome: ")
@@ -324,6 +339,7 @@ Inicio
    leia(email)
    escreval("Senha: ")
    leia(senha)
+   limpatela
    escreval(nome)
    escreval(sobrenome)
    escreval(nickname)
@@ -389,28 +405,42 @@ Var
    opcaoMenuUsuario: inteiro
 
 Inicio
-   escreval("--------------------------")
-   escreval("          MENU")
-   escreval("--------------------------")
+   escreval("-----------------------------------------------------------------")
+   escreval("                               MENU")
+   escreval("-----------------------------------------------------------------")
    escreval("Selecione uma das opções")
    escreval("[1] Iniciar Quiz")
-   escreval("[2] Configurações de Perfil")
-   escreval("[3] Modo Escuro")
-   escreval("[4] EXCLUIR CONTA")
+   escreval("[2] Ver todos os eventos")
+   escreval("[3] Configurações de Perfil")
+   escreval("[4] Modo Escuro")
+   escreval("[5] EXCLUIR CONTA")
    leia(opcaoMenuUsuario)
+   limpatela
 
    escolha(opcaoMenuUsuario)
 
    caso 1
       perguntasRespostas()
+
    caso 2
-      configuracoesUsuario()
+      escreval("-----------------------------------------------------------------")
+      eventoUm()
+      escreval("-----------------------------------------------------------------")
+      eventoDois()
+      escreval("-----------------------------------------------------------------")
+      eventoTres()
+      escreval("-----------------------------------------------------------------")
+      mostrarEventos()
+      confirmacaoMenuUser()
 
    caso 3
+      configuracoesUsuario()
+
+   caso 4
       escreval("*Modo escuro ativado*")
       menuUsuario()
 
-   caso 4
+   caso 5
       excluirContaUsuario()
 
    fimescolha
@@ -456,15 +486,17 @@ Var
    opcaoMenuAdm: inteiro
 
 Inicio
-   escreval("--------------------------")
-   escreval("          MENU")
-   escreval("--------------------------")
+   escreval("-----------------------------------------------------------------")
+   escreval("                               MENU")
+   escreval("-----------------------------------------------------------------")
    escreval("Selecione uma das opções")
    escreval("[1] Configurações de Perfil")
-   escreval("[2] Modo Escuro")
-   escreval("[3] Inserir Evento")
-   escreval("[4] EXCLUIR CONTA")
+   escreval("[2] Eventos cadastrados anteriormente")
+   escreval("[3] Modo Escuro")
+   escreval("[4] Inserir Evento")
+   escreval("[5] EXCLUIR CONTA")
    leia(opcaoMenuAdm)
+   limpatela
 
    escolha(opcaoMenuAdm)
 
@@ -472,20 +504,28 @@ Inicio
       configuracoesAdm()
 
    caso 2
+      escreval("-----------------------------------------------------------------")
+      eventoUm()
+      escreval("-----------------------------------------------------------------")
+      eventoDois()
+      escreval("-----------------------------------------------------------------")
+      eventoTres()
+      escreval("-----------------------------------------------------------------")
+      confirmacaoMenuAdm()
+
+   caso 3
       escreval("*Modo escuro ativado*")
       menuAdm()
 
-   caso 3
+   caso 4
       inserirEvento()
 
-   caso 4
+   caso 5
       excluirContaAdm()
       limpatela
 fimprocedimento
 
+// Entrada|Saída do Usuário
 Inicio
-
-   // Entrada|Saída do Usuário
-
    cadastro()
 Fimalgoritmo
