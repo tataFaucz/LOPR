@@ -1,4 +1,4 @@
-Algoritmo "teste02_SA"
+Algoritmo "projeto_s.a."
 // Disciplina   : [Linguagem e Lógica de Programação]
 // Professor   : Éwerton e Marisângila
 // Descrição   : Quiz -> Agenda Artístico-Cultural
@@ -12,8 +12,8 @@ Tipo
 
 Var
    evento: vetor [1..10] de eventos
-   opcao, i, nEventos, j, perguntaMenu: inteiro
-   email, senha, nome, sobrenome, nickname: caractere
+   opcao, i, nEventos, j, perguntaMenu, senhaAdm, senha: inteiro
+   email, nome, sobrenome, nickname, emailAdm: caractere
    contUm, contDois, contTres, rUm, rDois, rTres, resultado: inteiro
 
    //Quiz com perguntas estáticas
@@ -22,9 +22,9 @@ Var
    respostas: vetor [0..4] de inteiro
 Inicio
    limpatela
-   escreval("-----------------------------------------------------------------")
+   escreval("----------------------------------------------------------------")
    escreval("                       Iniciando Quiz")
-   escreval("-----------------------------------------------------------------")
+   escreval("----------------------------------------------------------------")
    escreval
    escreval("Qual desses locais você vai com mais frequência?")
    escreval("[1] Balada")
@@ -147,7 +147,7 @@ Inicio
       eventoTres()
    fimse
    escreval
-   escreval("-----------------------------------------------------------------")
+   escreval("----------------------------------------------------------------")
    mostrarEventos()
    confirmacaoMenuUser()
 fimprocedimento
@@ -185,7 +185,7 @@ procedimento entradaUsuario
 
 Inicio
    limpatela
-   escreval("-----------------------------------------------------------------")
+   escreval("----------------------------------------------------------------")
    escreval("Nome: ")
    leia(nome)
    escreval("Sobrenome: ")
@@ -195,10 +195,32 @@ Inicio
    leia(nickname)
    escreval("E-mail: ")
    leia(email)
-   escreval("Senha: ")
+   escreval("Senha PIN (sequência numérica): ")
    leia(senha)
    menuUsuario()
 
+fimprocedimento
+
+//E-mail estático Adm
+procedimento admEmail
+Inicio
+   emailAdm <- "agenda@artisticocultural.com.sc"
+   enquanto email <> emailAdm faca
+      escreval("E-mail incorreto! Digite novamente o e-mail de acesso")
+      leia(email)
+      limpatela
+   fimenquanto
+fimprocedimento
+
+//Senha estática Adm
+procedimento permissaoAdm
+Inicio
+   senhaAdm <- 123
+   enquanto senha <> senhaAdm faca
+      escreval("Senha incorreta! Digite novamente sua senha")
+      leia(senha)
+      limpatela
+   fimenquanto
 fimprocedimento
 
 //Cadastro Adm
@@ -206,16 +228,16 @@ procedimento entradaAdm
 
 Inicio
    limpatela
-   escreval("-----------------------------------------------------------------")
-   escreval("Nickname [ex.: Nome: Fulano")
-   escreval("Nickname: Fufu]: ")
-   leia(nickname)
+   escreval("----------------------------------------------------------------")
+   escreval("Nome: ")
+   leia(nome)
    escreval("E-mail de Administrador: ")
    leia(email)
+   admEmail()
    escreval("Senha: ")
    leia(senha)
+   permissaoAdm()
    menuAdm()
-
 fimprocedimento
 
 //Excluir Conta Adm
@@ -277,6 +299,11 @@ Inicio
    escreval("[2] Administrador")
    leia(opcao)
 
+   enquanto (opcao < 1) ou (opcao > 2) faca
+      escreval("Número inválido! Insira um número válido:")
+      leia(opcao)
+   fimenquanto
+
    escolha(opcao)
 
    caso 1
@@ -285,13 +312,7 @@ Inicio
    caso 2
       entradaAdm()
 
-   outrocaso
-      repita
-         escreval("Número inválido! Insira um número válido:")
-         leia(opcao)
-      ate (opcao=1) ou (opcao=2)
-   fimrepita
-
+   fimescolha
 fimprocedimento
 
 //Configurações Adm
@@ -299,7 +320,7 @@ procedimento configuracoesAdm
 
 Inicio
    limpatela
-   escreval("-----------------------------------------------------------------")
+   escreval("----------------------------------------------------------------")
    escreval("Nome: ")
    leia(nome)
    escreval("Sobrenome: ")
@@ -307,16 +328,12 @@ Inicio
    escreval("Nickname [ex.: Nome: Fulano")
    escreval("Nickname: Fufu]: ")
    leia(nickname)
-   escreval("E-mail: ")
-   leia(email)
-   escreval("Senha: ")
-   leia(senha)
    limpatela
    escreval(nome)
    escreval(sobrenome)
    escreval(nickname)
-   escreval(email)
-   escreval("senha:******")
+   escreval("E-mail:****@***")
+   escreval("Senha:******")
    escreval
    escreval("Alterações de perfil concluídas!")
    menuAdm()
@@ -327,7 +344,7 @@ procedimento configuracoesUsuario
 
 Inicio
    limpatela
-   escreval("-----------------------------------------------------------------")
+   escreval("----------------------------------------------------------------")
    escreval("Nome: ")
    leia(nome)
    escreval("Sobrenome: ")
@@ -356,11 +373,11 @@ procedimento inserirEvento
 
 Inicio
    limpatela
-   escreval("-----------------------------------------------------------------")
+   escreval("----------------------------------------------------------------")
    escreval("Quantos eventos deseja inserir? Você pode inserir até 10 eventos")
    leia(nEventos)
    para j de 1 ate nEventos faca
-      escreval("-----------------------------------------------------------------")
+      escreval("----------------------------------------------------------------")
       escreval("Nome do Evento: ")
       leia(evento[j].nomeEvento)
       escreval("Local do Evento: ")
@@ -393,7 +410,7 @@ Inicio
       escreval("Local: ", evento[j].local)
       escreval("Horário: ", evento[j].horario)
       escreval("Descrição: ", evento[j].descricao)
-      escreval("-----------------------------------------------------------------")
+      escreval("----------------------------------------------------------------")
    fimpara
 
 fimprocedimento
@@ -405,9 +422,9 @@ Var
    opcaoMenuUsuario: inteiro
 
 Inicio
-   escreval("-----------------------------------------------------------------")
-   escreval("                               MENU")
-   escreval("-----------------------------------------------------------------")
+   escreval("----------------------------------------------------------------")
+   escreval("                              MENU")
+   escreval("----------------------------------------------------------------")
    escreval("Selecione uma das opções")
    escreval("[1] Iniciar Quiz")
    escreval("[2] Ver todos os eventos")
@@ -417,19 +434,25 @@ Inicio
    leia(opcaoMenuUsuario)
    limpatela
 
+   enquanto (opcaoMenuUsuario < 1) ou (opcaoMenuUsuario > 5) faca
+      escreval("Número inválido! Insira um número válido:")
+      leia(opcaoMenuUsuario)
+      limpatela
+   fimenquanto
+
    escolha(opcaoMenuUsuario)
 
    caso 1
       perguntasRespostas()
 
    caso 2
-      escreval("-----------------------------------------------------------------")
+      escreval("----------------------------------------------------------------")
       eventoUm()
-      escreval("-----------------------------------------------------------------")
+      escreval("----------------------------------------------------------------")
       eventoDois()
-      escreval("-----------------------------------------------------------------")
+      escreval("----------------------------------------------------------------")
       eventoTres()
-      escreval("-----------------------------------------------------------------")
+      escreval("----------------------------------------------------------------")
       mostrarEventos()
       confirmacaoMenuUser()
 
@@ -486,9 +509,9 @@ Var
    opcaoMenuAdm: inteiro
 
 Inicio
-   escreval("-----------------------------------------------------------------")
-   escreval("                               MENU")
-   escreval("-----------------------------------------------------------------")
+   escreval("----------------------------------------------------------------")
+   escreval("                              MENU")
+   escreval("----------------------------------------------------------------")
    escreval("Selecione uma das opções")
    escreval("[1] Configurações de Perfil")
    escreval("[2] Eventos cadastrados anteriormente")
@@ -498,19 +521,25 @@ Inicio
    leia(opcaoMenuAdm)
    limpatela
 
+   enquanto (opcaoMenuAdm < 1) ou (opcaoMenuAdm > 5) faca
+      escreval("Número inválido! Insira um número válido:")
+      leia(opcaoMenuAdm)
+      limpatela
+   fimenquanto
+
    escolha(opcaoMenuAdm)
 
    caso 1
       configuracoesAdm()
 
    caso 2
-      escreval("-----------------------------------------------------------------")
+      escreval("----------------------------------------------------------------")
       eventoUm()
-      escreval("-----------------------------------------------------------------")
+      escreval("----------------------------------------------------------------")
       eventoDois()
-      escreval("-----------------------------------------------------------------")
+      escreval("----------------------------------------------------------------")
       eventoTres()
-      escreval("-----------------------------------------------------------------")
+      escreval("----------------------------------------------------------------")
       confirmacaoMenuAdm()
 
    caso 3
@@ -523,6 +552,7 @@ Inicio
    caso 5
       excluirContaAdm()
       limpatela
+   fimescolha
 fimprocedimento
 
 // Entrada|Saída do Usuário
