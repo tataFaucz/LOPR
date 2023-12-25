@@ -139,11 +139,11 @@ Inicio
       eventoUm()
    fimse
    escreval
-   se (resultado >= 90) e (resultado < 130) entao
+   se (resultado >= 90) e (resultado < 120) entao
       eventoDois()
    fimse
    escreval
-   se (resultado >= 130) entao
+   se (resultado >= 120) entao
       eventoTres()
    fimse
    escreval
@@ -197,6 +197,7 @@ Inicio
    leia(email)
    escreval("Senha PIN (sequência numérica): ")
    leia(senha)
+   limpatela
    menuUsuario()
 
 fimprocedimento
