@@ -1,0 +1,671 @@
+Algoritmo "projeto_s.a."
+// Disciplina   : [Linguagem e Lógica de Programação]
+// Professor   : Éwerton e Marisângila
+// Descrição   : Quiz -> Agenda Artístico-Cultural
+// Autor(a)    : Thais Faucz Jasse
+// Data atual  : 28/11/2023
+Tipo
+   eventos=registro
+      nomeEvento, local, horario, descricao, data: caractere
+      categoria: caractere
+   fimregistro
+
+Var
+   evento: vetor [1..10] de eventos
+   opcao, i, nEventos, j, perguntaMenu, senhaAdm, senha: inteiro
+   email, nome, sobrenome, nickname, emailAdm, voltaConfiguracao: caractere
+   contUm, contDois, contTres, rUm, rDois, rTres, resultado, configuracao: inteiro
+
+   //Quiz com perguntas estáticas
+procedimento perguntasRespostas
+Var
+   respostas: vetor [0..4] de inteiro
+Inicio
+   limpatela
+   escreval("----------------------------------------------------------------")
+   escreval("                       Iniciando Quiz")
+   escreval("----------------------------------------------------------------")
+   escreval
+   escreval("Qual desses locais você vai com mais frequência?")
+   escreval("[1] Balada")
+   escreval("[2] Biblioteca")
+   escreval("[3] Cinema")
+   leia(respostas[i])
+
+   se(respostas[i]=1) entao
+      contUm <- contUm + 1
+      rUm <- 10 * contUm
+   fimse
+   se(respostas[i]=2) entao
+      contDois <- contDois + 1
+      rDois <- 20 * contDois
+   fimse
+   se(respostas[i]=3) entao
+      contTres <- contTres + 1
+      rTres <- 30 * contTres
+   fimse
+   limpatela
+   escreval("Você tem o hábito de sair de casa para o lazer?")
+   escreval("[1] Sim, bastante.")
+   escreval("[2] Depende muito do dia.")
+   escreval("[3] Não muito, tenho preguiça.")
+   leia(respostas[i])
+
+   se(respostas[i]=1) entao
+      contUm <- contUm + 1
+      rUm <- 10 * contUm
+   fimse
+   se(respostas[i]=2) entao
+      contDois <- contDois + 1
+      rDois <- 20 * contDois
+   fimse
+   se(respostas[i]=3) entao
+      contTres <- contTres + 1
+      rTres <- 30 * contTres
+   fimse
+   limpatela
+   escreval("Você tem o hábito de praticar atividade física?")
+   escreval("[1] Sim, adoro me exercitar")
+   escreval("[2] Nem tanto, mas sempre tento me manter fora do sedentarismo")
+   escreval("[3] Não, minha coordenação motora é horrível")
+   leia(respostas[i])
+
+   se(respostas[i]=1) entao
+      contUm <- contUm + 1
+      rUm <- 10 * contUm
+   fimse
+   se(respostas[i]=2) entao
+      contDois <- contDois + 1
+      rDois <- 20 * contDois
+   fimse
+   se(respostas[i]=3) entao
+      contTres <- contTres + 1
+      rTres <- 30 * contTres
+   fimse
+   limpatela
+   escreval("Se você fosse escolher algum desses hobbies, qual seria?")
+   escreval("[1] Esportes num geral, dança ou teatro")
+   escreval("[2] Desenho, pintura ou escultura")
+   escreval("[3] Jogar videogames ou ouvir músicas")
+   leia(respostas[i])
+
+   se(respostas[i]=1) entao
+      contUm <- contUm + 1
+      rUm <- 10 * contUm
+   fimse
+   se(respostas[i]=2) entao
+      contDois <- contDois + 1
+      rDois <- 20 * contDois
+   fimse
+   se(respostas[i]=3) entao
+      contTres <- contTres + 1
+      rTres <- 30 * contTres
+   fimse
+   limpatela
+   escreval("Você se considera:")
+   escreval("[1] Uma pessoa extrovertida")
+   escreval("[2] Um indivíduo ambivertido (não está em nenhum dos dois extremos) ")
+   escreval("[3] Alguém mais introvertido")
+   leia(respostas[i])
+
+   se(respostas[i]=1) entao
+      contUm <- contUm + 1
+      rUm <- 10 * contUm
+   fimse
+   se(respostas[i]=2) entao
+      contDois <- contDois + 1
+      rDois <- 20 * contDois
+   fimse
+   se(respostas[i]=3) entao
+      contTres <- contTres + 1
+      rTres <- 30 * contTres
+   fimse
+   limpatela
+   calculoPontuacao()
+fimprocedimento
+
+//Calculo da pontuação
+procedimento calculoPontuacao
+Inicio
+   resultado <- rUm + rDois + rTres
+   resultadoQuiz()
+fimprocedimento
+
+// Procedimento Lógico de Respostas
+procedimento resultadoQuiz()
+Inicio
+
+   se (resultado >= 50) e (resultado < 90) entao
+      eventoUm()
+   fimse
+   escreval
+   se (resultado >= 90) e (resultado < 120) entao
+      eventoDois()
+   fimse
+   escreval
+   se (resultado >= 120) entao
+      eventoTres()
+   fimse
+   escreval
+   escreval("----------------------------------------------------------------")
+   mostrarEventos()
+   confirmacaoMenuUser()
+fimprocedimento
+
+//Pergunta de confirmação Usuário
+procedimento confirmacaoMenuUser
+Inicio
+   perguntaMenu <- 2
+   enquanto (perguntaMenu = 2) faca
+      escreval("Deseja voltar ao menu inicial? [1 - Sim][2 - Não]")
+      leia(perguntaMenu)
+      se perguntaMenu <> 2 entao
+         menuUsuario()
+      fimse
+   fimenquanto
+   limpatela
+fimprocedimento
+
+//Pergunta de confirmação Administrador
+procedimento confirmacaoMenuAdm
+Inicio
+   perguntaMenu <- 2
+   enquanto (perguntaMenu = 2) faca
+      escreval("Deseja voltar ao menu inicial? [1 - Sim][2 - Não]")
+      leia(perguntaMenu)
+      se perguntaMenu <> 2 entao
+         menuAdm()
+      fimse
+   fimenquanto
+   limpatela
+fimprocedimento
+
+// Cadastro Usuário
+procedimento entradaUsuario
+
+Inicio
+   limpatela
+   escreval("----------------------------------------------------------------")
+   escreval("Nome: ")
+   leia(nome)
+   escreval("Sobrenome: ")
+   leia(sobrenome)
+   escreval("Nickname [ex.: Nome: Fulano")
+   escreval("Nickname: Fufu]: ")
+   leia(nickname)
+   escreval("E-mail: ")
+   leia(email)
+   escreval("Senha PIN (sequência numérica): ")
+   leia(senha)
+   limpatela
+   menuUsuario()
+
+fimprocedimento
+
+//E-mail estático Adm
+procedimento admEmail
+Inicio
+   emailAdm <- "agenda@artisticocultural.com.sc"
+   enquanto email <> emailAdm faca
+      escreval("E-mail incorreto! Digite novamente o e-mail de acesso")
+      leia(email)
+      limpatela
+   fimenquanto
+fimprocedimento
+
+//Senha estática Adm
+procedimento permissaoAdm
+Inicio
+   senhaAdm <- 123
+   enquanto senha <> senhaAdm faca
+      escreval("Senha incorreta! Digite novamente sua senha")
+      leia(senha)
+      limpatela
+   fimenquanto
+fimprocedimento
+
+//Cadastro Adm
+procedimento entradaAdm
+
+Inicio
+   limpatela
+   escreval("----------------------------------------------------------------")
+   escreval("Nome: ")
+   leia(nome)
+   escreval("E-mail de Administrador: ")
+   leia(email)
+   admEmail()
+   escreval("Senha: ")
+   leia(senha)
+   permissaoAdm()
+   menuAdm()
+fimprocedimento
+
+//Excluir Conta Adm
+procedimento excluirContaAdm
+Var
+
+   opcaoExcluirAdm: inteiro
+
+Inicio
+   limpatela
+   escreval("Deseja realmente excluir conta?")
+   escreval()
+   escreval("[1] para sim")
+   escreval("[2] para não")
+   leia(opcaoExcluirAdm)
+
+   escolha(opcaoExcluirAdm)
+
+   caso 1
+      escreval("CONTA EXCLUÍDA!")
+      cadastro()
+
+   caso 2
+      menuAdm()
+
+   fimescolha
+fimprocedimento
+
+//Excluir Conta Usuário
+procedimento excluirContaUsuario
+Var
+
+   opcaoExcluirUsuario: inteiro
+
+Inicio
+   limpatela
+   escreval("Deseja realmente excluir conta?")
+   escreval()
+   escreval("[1] para sim")
+   escreval("[2] para não")
+   leia(opcaoExcluirUsuario)
+   escolha(opcaoExcluirUsuario)
+
+   caso 1
+      escreval("CONTA EXCLUÍDA!")
+      cadastro()
+
+   caso 2
+      menuUsuario()
+
+   fimescolha
+fimprocedimento
+
+//Sair do aplicativo
+procedimento saidaAplicativo
+Inicio
+   escreval("Saindo do aplicativo!")
+fimprocedimento
+
+//Tipo de Cadastro
+procedimento cadastro()
+
+Inicio
+   limpatela
+   escreval("Qual o seu tipo de cadastro?")
+   escreval()
+   escreval("[1] Usuário")
+   escreval("[2] Administrador")
+   escreval("[3] Sair do aplicativo")
+   leia(opcao)
+
+   enquanto (opcao < 1) ou (opcao > 3) faca
+      escreval("Número inválido! Insira um número válido:")
+      leia(opcao)
+   fimenquanto
+
+   escolha(opcao)
+
+   caso 1
+      entradaUsuario()
+
+   caso 2
+      entradaAdm()
+
+   caso 3
+      saidaAplicativo()
+
+   fimescolha
+fimprocedimento
+
+//Configurações Adm
+procedimento configuracoesAdm
+
+Inicio
+
+   limpatela
+   escreval("----------------------------------------------------------------")
+   escreval("Insira a opção desejada para ser (re)configurada")
+   escreval("[1] Nome")
+   escreval("[2] Sobrenome")
+   escreval("[3] Nickname")
+   escreval("[4] Sair das configurações de perfil")
+   leia(configuracao)
+
+   escolha(configuracao)
+
+   caso 1
+   
+      limpatela
+      escreval("Digite o seu novo nome aqui: ")
+      leia(nome)
+      escreval
+      escreval("Ok, seu novo nome é ", nome)
+      escreval("Pressione 'ENTER' para voltar ao menu de configurações")
+      leia(voltaConfiguracao)
+      configuracoesAdm()
+
+   caso 2
+   
+      limpatela
+      escreval("Digite o seu novo sobrenome aqui: ")
+      leia(sobrenome)
+      escreval
+      escreval("Ok, seu novo nome é ", sobrenome)
+      escreval("Pressione 'ENTER' para voltar ao menu de configurações")
+      leia(voltaConfiguracao)
+      configuracoesAdm()
+
+   caso 3
+   
+      limpatela
+      escreval("Digite o seu novo nickname aqui: ")
+      leia(nickname)
+      escreval
+      escreval("Ok, seu novo nome é ", nickname)
+      escreval("Pressione 'ENTER' para voltar ao menu de configurações")
+      leia(voltaConfiguracao)
+      configuracoesAdm()
+
+   caso 4
+
+      menuAdm()
+
+fimprocedimento
+
+//Configurações Usuário
+procedimento configuracoesUsuario
+
+Inicio
+
+   limpatela
+   escreval("----------------------------------------------------------------")
+   escreval("Insira a opção desejada para ser (re)configurada")
+   escreval("[1] Nome")
+   escreval("[2] Sobrenome")
+   escreval("[3] Nickname")
+   escreval("[4] E-mail")
+   escreval("[5] Senha")
+   escreval("[6] Sair das configurações de perfil")
+   leia(configuracao)
+
+   escolha(configuracao)
+
+   caso 1
+   
+      limpatela
+      escreval("Digite o seu novo nome aqui: ")
+      leia(nome)
+      escreval
+      escreval("Ok, seu novo nome é ", nome)
+      escreval("Pressione 'ENTER' para voltar ao menu de configurações")
+      leia(voltaConfiguracao)
+      configuracoesUsuario()
+
+   caso 2
+   
+      limpatela
+      escreval("Digite o seu novo sobrenome aqui: ")
+      leia(sobrenome)
+      escreval
+      escreval("Ok, seu novo nome é ", sobrenome)
+      escreval("Pressione 'ENTER' para voltar ao menu de configurações")
+      leia(voltaConfiguracao)
+      configuracoesUsuario()
+
+   caso 3
+   
+      limpatela
+      escreval("Digite o seu novo nickname aqui: ")
+      leia(nickname)
+      escreval
+      escreval("Ok, seu novo nome é ", nickname)
+      escreval("Pressione 'ENTER' para voltar ao menu de configurações")
+      leia(voltaConfiguracao)
+      configuracoesUsuario()
+
+   caso 4
+   
+      limpatela
+      escreval("Digite o seu novo e-mail aqui: ")
+      leia(email)
+      escreval
+      escreval("Ok, seu novo e-mail é ", email)
+      escreval("Pressione 'ENTER' para voltar ao menu de configurações")
+      leia(voltaConfiguracao)
+      configuracoesUsuario()
+
+   caso 5
+   
+      limpatela
+      escreval("Digite o sua nova senha aqui: ")
+      leia(senha)
+      escreval
+      escreval("Ok, sua senha foi cadastrada")
+      escreval("Pressione 'ENTER' para voltar ao menu de configurações")
+      leia(voltaConfiguracao)
+      configuracoesUsuario()
+
+   caso 6
+
+      menuUsuario()
+
+fimprocedimento
+
+//Inserir evento(aba adm)
+procedimento inserirEvento
+
+Inicio
+   limpatela
+   escreval("----------------------------------------------------------------")
+   escreval("Quantos eventos deseja inserir? Você pode inserir até 10 eventos")
+   leia(nEventos)
+   para j de 1 ate nEventos faca
+      escreval("----------------------------------------------------------------")
+      escreval("Nome do Evento: ")
+      leia(evento[j].nomeEvento)
+      escreval("Local do Evento: ")
+      leia(evento[j].local)
+      escreval("Data do evento [dd/mm/aa]")
+      leia(evento[j].data)
+      escreval("Horário do evento[hh:mm]: ")
+      leia(evento[j].horario)
+      escreval("Insira uma breve descrição sobre o evento: ")
+      leia(evento[j].descricao)
+      escreval
+      limpatela
+      escreval("Nome evento: ", evento[j].nomeEvento)
+      escreval("Local: ", evento[j].local)
+      escreval("Data: ", evento[j].data)
+      escreval("Horário: ", evento[j].horario)
+      escreval("Descrição: ", evento[j].descricao)
+      escreval("Evento inserido ao programa com sucesso!")
+      escreval
+   fimpara
+   menuAdm()
+
+fimprocedimento
+
+//Ver evento(aba usuário)
+procedimento mostrarEventos
+Var
+   j: inteiro
+Inicio
+
+   para j de 1 ate nEventos faca
+      escreval("Nome evento: ", evento[j].nomeEvento)
+      escreval("Local: ", evento[j].local)
+      escreval("Data: ", evento[j].data)
+      escreval("Horário: ", evento[j].horario)
+      escreval("Descrição: ", evento[j].descricao)
+      escreval("----------------------------------------------------------------")
+   fimpara
+
+fimprocedimento
+
+//Menu Usuario
+procedimento menuUsuario
+
+Var
+   opcaoMenuUsuario: inteiro
+
+Inicio
+   escreval("----------------------------------------------------------------")
+   escreval("                              MENU")
+   escreval("----------------------------------------------------------------")
+   escreval("Selecione uma das opções")
+   escreval("[1] Iniciar Quiz")
+   escreval("[2] Ver todos os eventos")
+   escreval("[3] Configurações de Perfil")
+   escreval("[4] Modo Escuro")
+   escreval("[5] Sair do aplicativo")
+   escreval("[6] EXCLUIR CONTA")
+   leia(opcaoMenuUsuario)
+   limpatela
+
+   enquanto (opcaoMenuUsuario < 1) ou (opcaoMenuUsuario > 6) faca
+      escreval("Número inválido! Insira um número válido:")
+      leia(opcaoMenuUsuario)
+      limpatela
+   fimenquanto
+
+   escolha(opcaoMenuUsuario)
+
+   caso 1
+      perguntasRespostas()
+
+   caso 2
+      escreval("----------------------------------------------------------------")
+      eventoUm()
+      escreval("----------------------------------------------------------------")
+      eventoDois()
+      escreval("----------------------------------------------------------------")
+      eventoTres()
+      escreval("----------------------------------------------------------------")
+      mostrarEventos()
+      confirmacaoMenuUser()
+
+   caso 3
+      configuracoesUsuario()
+
+   caso 4
+      escreval("*Modo escuro ativado*")
+      menuUsuario()
+
+   caso 5
+      saidaAplicativo()
+
+   caso 6
+      excluirContaUsuario()
+
+   fimescolha
+   limpatela
+fimprocedimento
+
+//Procedimentos de eventos pré-definidos
+procedimento eventoUm
+Inicio
+
+   escreval("Evento: Jardim da Dança")
+   escreval("Local: Jardim da Dança - EEB Prof Germano Timm")
+   escreval("Horário: 14:00 hrs")
+   escreval("Descrição: Evento onde bailarinos se expressam através")
+   escreval("da arte que eles mais amam: dança!")
+   
+fimprocedimento
+
+procedimento eventoDois
+Inicio
+
+   escreval("Evento: Encontro das ruas")
+   escreval("Local: Praça do Museu de Arte de Joinville (MAJ)")
+   escreval("Horário: 19:15 hrs")
+   escreval("Descrição: Levando prosa pra todo lugar, o coletivo SLAM GUARÁ")
+   escreval("acolhe qualquer pessoa que queira se expressar em poesia ou em prosa.")
+   escreval("Batalha de prosas e muita diversão")
+   
+fimprocedimento
+
+procedimento eventoTres
+Inicio
+
+   escreval("Evento: Film Concert")
+   escreval("Local: Teatro Juarez Machado")
+   escreval("Horário: 20:00 hrs")
+   escreval("Descrição:Concerto com a temática de músicas de filmes")
+   escreval("marcantes para a história do cinema")
+   
+fimprocedimento
+
+
+//Menu Adm
+procedimento menuAdm
+Var
+   opcaoMenuAdm: inteiro
+
+Inicio
+   escreval("----------------------------------------------------------------")
+   escreval("                              MENU")
+   escreval("----------------------------------------------------------------")
+   escreval("Selecione uma das opções")
+   escreval("[1] Configurações de Perfil")
+   escreval("[2] Eventos cadastrados anteriormente")
+   escreval("[3] Modo Escuro")
+   escreval("[4] Inserir Evento")
+   escreval("[5] Sair do aplicativo")
+   escreval("[6] EXCLUIR CONTA")
+   leia(opcaoMenuAdm)
+   limpatela
+
+   enquanto (opcaoMenuAdm < 1) ou (opcaoMenuAdm > 6) faca
+      escreval("Número inválido! Insira um número válido:")
+      leia(opcaoMenuAdm)
+      limpatela
+   fimenquanto
+
+   escolha(opcaoMenuAdm)
+
+   caso 1
+      configuracoesAdm()
+
+   caso 2
+      escreval("----------------------------------------------------------------")
+      eventoUm()
+      escreval("----------------------------------------------------------------")
+      eventoDois()
+      escreval("----------------------------------------------------------------")
+      eventoTres()
+      escreval("----------------------------------------------------------------")
+      confirmacaoMenuAdm()
+
+   caso 3
+      escreval("*Modo escuro ativado*")
+      menuAdm()
+
+   caso 4
+      inserirEvento()
+
+   caso 5
+      saidaAplicativo()
+
+   caso 6
+      excluirContaUsuario()
+      limpatela
+   fimescolha
+fimprocedimento
+
+// Entrada|Saída do Usuário
+Inicio
+   cadastro()
+Fimalgoritmo
